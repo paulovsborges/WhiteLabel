@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.douglasmotta.whitelabeltutorial.databinding.FragmentProductsBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ProductsFragment : Fragment() {
 
@@ -19,5 +20,6 @@ class ProductsFragment : Fragment() {
     ): View {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 }
