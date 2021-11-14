@@ -11,5 +11,6 @@ data class Product(
     var price: Double = 0.0,
 
     @get:PropertyName ("image_url")
+    @set:PropertyName ("image_url")
     var imageUrl: String =""
 ): Parcelable

@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.douglasmotta.whitelabeltutorial.databinding.ItemProductBinding
 import br.com.douglasmotta.whitelabeltutorial.domain.model.Product
+import br.com.douglasmotta.whitelabeltutorial.ui.products.ProductsListAdapter.ProductsViewHolder
 import br.com.douglasmotta.whitelabeltutorial.util.toCurrency
 import com.bumptech.glide.Glide
 
-class ProductsListAdapter : ListAdapter<Product, ProductsListAdapter.ProductsViewHolder>(
+class ProductsListAdapter : ListAdapter<Product, ProductsViewHolder>(
     DIFF_CALLBACK
 ) {
 
