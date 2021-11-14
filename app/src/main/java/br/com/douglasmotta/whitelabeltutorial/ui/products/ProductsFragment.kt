@@ -37,9 +37,9 @@ class ProductsFragment : Fragment() {
     private fun observeVm() {
 
         viewModel.productsList.observe(viewLifecycleOwner) {
-//            binding.mainRecycler.adapter = ProductsAdapter(it)
+            binding.mainRecycler.adapter = ProductsAdapter(it)
 
-            adapterList.submitList(it)
+//            adapterList.submitList(it)
         }
     }
 
