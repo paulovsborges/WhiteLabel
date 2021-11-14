@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 apply plugin: 'kotlin-kapt'

@@ -41,6 +41,10 @@ class ProductsFragment : Fragment() {
 
 //            adapterList.submitList(it)
         }
+
+        viewModel.buttonVisibility.observe(viewLifecycleOwner) { visibility ->
+            binding.fabAddProduct.visibility = visibility
+        }
     }
 
     private fun setRecyclerView() {
@@ -48,6 +52,10 @@ class ProductsFragment : Fragment() {
             setHasFixedSize(true)
             adapter = adapterList
         }
+    }
+
+    private fun setListeners(){
+
     }
 
     override fun onDestroyView() {
