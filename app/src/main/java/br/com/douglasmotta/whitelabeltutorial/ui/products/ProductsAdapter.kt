@@ -9,8 +9,9 @@ import br.com.douglasmotta.whitelabeltutorial.util.toCurrency
 import com.bumptech.glide.Glide
 
 class ProductsAdapter(
-    private val items: List<Product>
-) : RecyclerView.Adapter< ProductsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
+
+    private var items: List<Product> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -36,5 +37,14 @@ class ProductsAdapter(
             binding.productDescription.text = item.description
             binding.productPrice.text = item.price.toCurrency()
         }
+    }
+
+    fun setList(products: List<Product>) {
+        items = products
+        notifyDataSetChanged()
+    }
+
+    fun currentList(): List<Product> {
+        return items
     }
 }

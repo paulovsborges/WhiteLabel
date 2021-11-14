@@ -23,6 +23,7 @@
             tools:src="@drawable/background_product_image_error" />
 
         <TextView
+            style="@style/Text.Primary"
             android:id="@+id/productDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,6 +34,7 @@
             tools:text="description" />
 
         <TextView
+            style="@style/Text.Secondary"
             android:id="@+id/productPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -3,12 +3,14 @@ package br.com.douglasmotta.whitelabeltutorial.ui.addproduct
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.navigation.fragment.findNavController
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import br.com.douglasmotta.whitelabeltutorial.databinding.AddProductFragmentBinding
 import br.com.douglasmotta.whitelabeltutorial.util.CurrencyTextWatcher
+import br.com.douglasmotta.whitelabeltutorial.util.PRODUCT_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AddProductFragment : BottomSheetDialogFragment() {
 
-    private val viewModel : AddProductViewModel by viewModels()
+    private val viewModel: AddProductViewModel by viewModels()
     private var _binding: AddProductFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -55,6 +57,13 @@ class AddProductFragment : BottomSheetDialogFragment() {
 
         viewModel.priceErrorFieldResId.observe(viewLifecycleOwner) { stringResId ->
             binding.container2.setError(stringResId)
+        }
+
+        viewModel.productCreated.observe(viewLifecycleOwner) { product ->
+            findNavController().run {
+                previousBackStackEntry?.savedStateHandle?.set(PRODUCT_KEY, product)
+                popBackStack()
+            }
         }
     }
 
