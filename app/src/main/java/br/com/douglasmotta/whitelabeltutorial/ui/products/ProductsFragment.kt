@@ -22,6 +22,7 @@ class ProductsFragment : Fragment() {
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
     private val adapterList = ProductsAdapter()
+    private val newAdapter = ProductsListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,12 +40,25 @@ class ProductsFragment : Fragment() {
         setRecyclerView()
         setListeners()
         observeNavBackStack()
+
+
+        val fakeList = listOf(
+            Product("", "", 0.0, ""),
+            Product("", "", 0.0, ""),
+            Product("", "", 0.0, ""),
+            Product("", "", 0.0, ""),
+            Product("", "", 0.0, ""),
+        )
+
+        newAdapter.submitList(fakeList)
     }
 
     private fun observeVm() {
 
         viewModel.productsList.observe(viewLifecycleOwner) {
-            adapterList.setList(it)
+//            adapterList.setList(it)
+
+            newAdapter.submitList(it)
             binding.swipeProduct.isRefreshing = false
         }
 
