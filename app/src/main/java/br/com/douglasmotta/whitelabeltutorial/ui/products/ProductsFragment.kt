@@ -21,8 +21,7 @@ class ProductsFragment : Fragment() {
     private val viewModel: ProductsViewModel by viewModels()
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
-    private val adapterList = ProductsAdapter()
-    private val newAdapter = ProductsListAdapter()
+    private val productsAdapter = ProductsListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,25 +39,13 @@ class ProductsFragment : Fragment() {
         setRecyclerView()
         setListeners()
         observeNavBackStack()
-
-
-        val fakeList = listOf(
-            Product("", "", 0.0, ""),
-            Product("", "", 0.0, ""),
-            Product("", "", 0.0, ""),
-            Product("", "", 0.0, ""),
-            Product("", "", 0.0, ""),
-        )
-
-        newAdapter.submitList(fakeList)
     }
 
     private fun observeVm() {
 
         viewModel.productsList.observe(viewLifecycleOwner) {
-//            adapterList.setList(it)
+            productsAdapter.submitList(it)
 
-            newAdapter.submitList(it)
             binding.swipeProduct.isRefreshing = false
         }
 
@@ -68,9 +55,9 @@ class ProductsFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        binding.mainRecycler.apply {
+        binding.mainRecycler.run {
             setHasFixedSize(true)
-            adapter = adapterList
+            adapter = productsAdapter
         }
     }
 
@@ -98,13 +85,13 @@ class ProductsFragment : Fragment() {
             val observer = LifecycleEventObserver { _, Event ->
                 if (Event == Lifecycle.Event.ON_RESUME && savedStateHandle.contains(PRODUCT_KEY)) {
                     val product = savedStateHandle.get<Product>(PRODUCT_KEY)
-                    val oldList = adapterList.currentList()
+                    val oldList = productsAdapter.currentList
                     val newList = oldList.toMutableList().apply {
                         product?.let {
                             add(it)
                         }
                     }
-                    adapterList.setList(newList)
+                    productsAdapter.submitList(newList)
                     binding.mainRecycler.smoothScrollToPosition(newList.size - 1)
                     savedStateHandle.remove<Product>(PRODUCT_KEY)
                 }
